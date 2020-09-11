@@ -5,7 +5,7 @@ networking-l2gw
 API's and implementations to support L2 Gateways in Neutron.
 
 * Free software: Apache license
-* Source: https://opendev.org/openstack/networking-l2gw
+* Source: https://opendev.org/x/networking-l2gw
 
 L2 Gateways
 -----------
@@ -70,7 +70,8 @@ segment, and a management interface with IP 10.225.0.27.
 At this point your l2gw node is running.
 
 For the configuration of the Openstack control plane you have to check three files:
-``neutron.conf``, `l2gw_plugin.ini <https://github.com/openstack/networking-l2gw/blob/master/etc/l2gw_plugin.ini>`__, and `l2gateway_agent.ini <https://github.com/openstack/networking-l2gw/blob/master/etc/l2gateway_agent.ini>`__
+``neutron.conf``, `l2gw_plugin.ini <https://opendev.org/x/networking-l2gw/src/commit/b20b90d7694f8c47e2275bc17995f4854eedf6ae/etc/l2gw_plugin.ini>`__, 
+and `l2gateway_agent.ini <https://opendev.org/x/networking-l2gw/src/commit/b20b90d7694f8c47e2275bc17995f4854eedf6ae/etc/l2gateway_agent.ini>`__
 Edit your ``neutron.conf`` on the controller node and make sure that in the ``service_plugins`` you have the string
 ``networking_l2gw.services.l2gateway.plugin.L2GatewayPlugin``.
 
@@ -86,7 +87,7 @@ The default for the l2gw_plugin.ini file should be okay.
 Now you are ready to create the database tables for the neutron l2gw plugin using the command:
 ``neutron-db-manage upgrade heads``
 
-The file `l2gateway_agent.ini <https://github.com/openstack/networking-l2gw/blob/master/etc/l2gateway_agent.ini>`__ is used to configure the neutron-l2gateway agent.
+The file `l2gateway_agent.ini <https://opendev.org/x/networking-l2gw/src/commit/b20b90d7694f8c47e2275bc17995f4854eedf6ae/etc/l2gateway_agent.ini>`__ is used to configure the neutron-l2gateway agent.
 The agent is the piece of software that will configure the l2gw node when you interact with the Openstack API.
 Here it is important to give the pointer to the switch.
 ``ovsdb_hosts = 'ovsdb1:10.225.0.27:6632'``

@@ -7,7 +7,7 @@
 2. Add this repo as an external repository and configure following flags in ``local.conf``::
 
      [[local|localrc]]
-     enable_plugin networking-l2gw https://github.com/openstack/networking-l2gw
+     enable_plugin networking-l2gw https://github.com/x/networking-l2gw
      enable_service l2gw-plugin l2gw-agent
      OVSDB_HOSTS=<ovsdb_name>:<ip address>:<port>
 

@@ -1,0 +1,17 @@
+- project:
+    templates:
+      - check-requirements
+      - openstack-python3-victoria-jobs-neutron
+      - build-openstack-docs-pti
+    check:
+      jobs:
+        - networking-l2gw-tempest-dummy
+        # Currently, we cannot specify that we want neutron
+        # checked out from master using tox-siblings for this
+        # job, so this always fails.
+        # TODO: make this voting again
+        - openstack-tox-lower-constraints:
+            voting: false
+    gate:
+      jobs:
+        - networking-l2gw-tempest-dummy
