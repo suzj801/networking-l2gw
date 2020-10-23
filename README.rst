@@ -50,9 +50,14 @@ segment, and a management interface with IP 10.225.0.27.
 ::
 
   ip link set up dev ens5
+  apt-get update
   apt-get install openvswitch-vtep
   ovsdb-tool create /etc/openvswitch/vtep.db /usr/share/openvswitch/vtep.ovsschema
   ovsdb-tool create /etc/openvswitch/vswitch.db /usr/share/openvswitch/vswitch.ovsschema
+  # Stop OVS services started by the installer.
+  systemctl is-active --quiet ovs-vswitchd && systemctl stop ovs-vswitchd
+  systemctl is-active --quiet ovsdb-server && systemctl stop ovsdb-server
+  mkdir -p /var/run/openvswitch/
   ovsdb-server --pidfile --detach --log-file --remote ptcp:6632:10.225.0.27 \
                --remote punix:/var/run/openvswitch/db.sock --remote=db:hardware_vtep,Global,managers \
                /etc/openvswitch/vswitch.db /etc/openvswitch/vtep.db
