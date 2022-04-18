@@ -573,8 +573,13 @@ class L2GatewayMixin(l2gateway.L2GatewayPluginBase,
 
 def l2gw_callback(resource, event, trigger, **kwargs):
     l2gwservice = directory.get_plugin(constants.L2GW)
-    context = kwargs.get('context')
-    port_dict = kwargs.get('port')
+    payload = kwargs.get('payload')
+    if payload:
+        context = payload.context
+        port_dict = payload.latest_state
+    else:
+        context = kwargs.get('context')
+        port_dict = kwargs.get('port')
     if l2gwservice:
         if event == events.AFTER_UPDATE:
             l2gwservice.add_port_mac(context, port_dict)
